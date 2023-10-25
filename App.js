@@ -12,7 +12,6 @@ const Stack = createNativeStackNavigator()
 export default function App() {
     return (
         <UserNameProvider>
-            {/******************** main view part ***********************/}
             <SafeAreaView style={tw`${style.root}`}>
                 <StatusBar style="auto" />
                 <NavigationContainer>
@@ -20,13 +19,10 @@ export default function App() {
                         screenOptions={{
                             headerShown: false,
                         }}>
-                        {/************** screen **************/}
                         <Stack.Screen name="home" component={HomeScreen} />
-                        {/*************** end ***************/}
                     </Stack.Navigator>
                 </NavigationContainer>
             </SafeAreaView>
-            {/******************** end view part ***********************/}
         </UserNameProvider>
     )
 }

@@ -1,0 +1,88 @@
+###################################################################
+######                      Healthx App                       #####
+###################################################################
+
+### Import Problem ###
+import { useNavigation } from '@react-navigation/native'
+const navigation = useNavigation()
+
+
+
+######## API Methods ########
+
+### Get ####
+useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(
+                    `${apiV1}/`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                )
+
+                const data = await response.json()
+
+                if (response.ok) {
+                   console.log('success')
+                }
+            } catch {
+                console.log('Please check your internet connection!')
+            }
+        }
+        fetchData()
+}, [])
+
+
+### Post ####
+const handleSubmit = async () => {
+        const details = {
+           //
+        }
+
+        try {
+            const response = await fetch(`${apiV1}/`, {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(details),
+            })
+
+            const log  = await response.json()
+
+            if (response.ok) {
+                console.log('success')
+            } else {
+                alert(log.context + '!')
+            }
+        } catch {
+            // import alertMessage from utils
+            alert('Please check your internet connection!')
+        }
+}
+
+
+### Custom Alert ### 
+const customAlert = () => {
+        Alert.alert(
+            `Hello!`,
+            `This is your profile`,
+            [
+                {
+                    text: 'cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                { text: 'close', onPress: () => '' },
+            ],
+            { cancelable: false }
+        )
+}
